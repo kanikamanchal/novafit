@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NOVA | KETO PEAK · Elite Metabolic Protocol</title>
+    <!-- Google Fonts (same as original) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (same icon library) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #05070A;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* smooth scroll & subtle background texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.08) 0%, rgba(5,7,10,0.95) 90%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* custom scrollbar (same vibe) */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0f1217; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+
+        /* main container — centered, no header/footer */
+        .keto-detail-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* glassmorphism core (same as original glass class) */
+        .glass-card {
+            background: rgba(12, 18, 28, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-radius: 40px;
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* hero / header block inside content */
+        .plan-hero {
+            text-align: center;
+            padding: 2.5rem 2rem 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            background: rgba(59,130,246,0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 1px solid rgba(59,130,246,0.5);
+            color: #94a3f8;
+            margin-bottom: 1rem;
+        }
+
+        .plan-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 4.8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #60a5fa, #3b82f6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #cbd5e6;
+            max-width: 700px;
+            margin: 0 auto 1.2rem;
+        }
+
+        .macro-tagline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .macro-chip {
+            background: rgba(59,130,246,0.12);
+            border-radius: 60px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 0.5px solid rgba(59,130,246,0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        .macro-chip i {
+            margin-right: 8px;
+            color: #3b82f6;
+        }
+
+        /* info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            padding: 1.6rem;
+            border-radius: 32px;
+            background: rgba(8, 12, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59,130,246,0.25);
+            transition: transform 0.2s ease, border-color 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-6px);
+        }
+
+        .info-card i {
+            font-size: 2.2rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p, .info-card ul {
+            color: #b9c3d4;
+            font-size: 0.9rem;
+        }
+
+        .info-card ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* macros breakdown visual */
+        .macros-section {
+            background: rgba(5, 7, 12, 0.6);
+            border-radius: 36px;
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+
+        .macros-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .macro-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .macro-item {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .macro-label {
+            width: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .macro-bar-bg {
+            flex: 1;
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .macro-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            width: 0%;
+        }
+
+        .macro-percent {
+            width: 55px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        /* meal plan grid */
+        .meal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 2rem;
+        }
+
+        .meal-card {
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            border-left: 3px solid #3b82f6;
+            transition: all 0.2s;
+        }
+
+        .meal-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meal-card p {
+            color: #cbd5e6;
+            font-size: 0.85rem;
+        }
+
+        .food-list {
+            margin-top: 0.6rem;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .food-list li {
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: #b9c3d4;
+        }
+
+        .food-list li i {
+            color: #3b82f6;
+            font-size: 0.7rem;
+            margin-right: 6px;
+        }
+
+        .cta-block {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding: 2rem;
+            border-radius: 48px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #3b82f6, #2563eb);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px rgba(59,130,246,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.03);
+            box-shadow: 0 18px 30px -8px #3b82f6;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid rgba(59,130,246,0.5);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #cbd5e6;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .back-link:hover {
+            background: rgba(59,130,246,0.2);
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .keto-detail-container {
+                padding: 1rem 1rem 2.5rem;
+            }
+            .macro-label {
+                width: 80px;
+            }
+            .plan-hero {
+                padding: 1.5rem;
+            }
+        }
+
+        /* additional glow */
+        .gradient-text {
+            background: linear-gradient(120deg, #3b82f6, #93c5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        hr {
+            border-color: rgba(59,130,246,0.2);
+            margin: 1rem 0;
+        }
+        .floating-icon {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 8rem;
+            right: -30px;
+            bottom: -30px;
+            pointer-events: none;
+        }
+    </style>
+    </head>
+    <body>
+<div class="cursor-circle"></div>
+<div class="cursor-dot"></div>
+
+<nav class="navbar">
+    <div class="logo">NOVA<span style="color:#3b82f6;">FIT</span></div>
+
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#about-section">About us</a>
+        <a href="#diet">Diet planner</a>
+        <a href="#membership-section">Membership</a>
+        <a href="bmi.html">BMI Calculator</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="nav-btn" id="joinUsBtn">Join us</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="https://videos.pexels.com/video-files/4494698/4494698-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="overlay-dark"></div>
+    <div class="hero-content">
+        <h1 id="heroMainText" style =" text-shadow: rgb(243 243 243 / 57%) 5.4612px 9.92386px 30px;
+    translate: none;
+    rotate: none;
+    scale: none;
+    transform: translate(0px, 0px);
+    opacity: 1;">SCULPT YOUR<br> EVOLUTION</h1>
+        <p class="hero-glow">Next‑gen performance. Limitless energy. Elite transformation.</p>
+        <button class="btn-primary" id="heroCta">IGNITE NOW <i class="fas fa-bolt"></i></button>
+    </div>
+    <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+</section>
+<div class="keto-detail-container">
+    <!-- optional back button (not header/footer, just convenience) -->
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to diet plans</a>
+   
+    <!-- MAIN CARD: everything centered inside -->
+    <div class="glass-card plan-hero">
+        <div class="plan-badge"><i class="fas fa-fire"></i> SCIENCE-BACKED KETOSIS</div>
+        <h1>KETO PEAK</h1>
+        <div class="hero-sub">High-fat, low-carb metabolic optimization for rapid fat adaptation & relentless mental clarity.</div>
+        <div class="macro-tagline">
+            <span class="macro-chip"><i class="fas fa-bacon"></i> 70-75% Fat</span>
+            <span class="macro-chip"><i class="fas fa-dumbbell"></i> 20-25% Protein</span>
+            <span class="macro-chip"><i class="fas fa-apple-alt"></i> 5-10% Carbs</span>
+            <span class="macro-chip"><i class="fas fa-bolt"></i> Net carbs < 30g/day</span>
+        </div>
+        <div class="floating-icon"><i class="fas fa-egg"></i></div>
+    </div>
+
+    <!-- 2-column info grid: Benefits + How it works -->
+    <div class="info-grid">
+        <div class="info-card">
+            <i class="fas fa-charging-station"></i>
+            <h3>Elite Benefits</h3>
+            <ul>
+                <li><i class="fas fa-burn"></i> Accelerated fat oxidation</li>
+                <li><i class="fas fa-brain"></i> Sharper cognitive focus & energy</li>
+                <li><i class="fas fa-chart-line"></i> Stable blood glucose, less cravings</li>
+                <li><i class="fas fa-heartbeat"></i> Enhanced mitochondrial health</li>
+                <li><i class="fas fa-dumbbell"></i> Preserves lean muscle mass</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-microscope"></i>
+            <h3>Metabolic Science</h3>
+            <p>KETO PEAK shifts your metabolism from glucose-dependence to ketone utilization. By drastically reducing carbs and moderating protein, your liver produces ketones — an ultra-clean fuel that enhances endurance and mental performance. Our precision protocol avoids common pitfalls (keto flu, electrolyte imbalance) with strategic mineral support.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h3>Fat Adaptation Timeline</h3>
+            <p>Phase 1 (days 1-3): glycogen depletion.<br>
+            Phase 2 (days 4-10): rising ketones, possible transition symptoms.<br>
+            Phase 3 (week 2+): full metabolic flexibility, skyrocketing energy.<br>
+            <span class="gradient-text">NOVA coaching available for smooth adaptation.</span></p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-seedling"></i>
+            <h3>Key Nutrient Focus</h3>
+            <p>Electrolytes (sodium, potassium, magnesium) + MCT oil, omega-3s, and fiber from low-carb greens. Our AI diet tracker ensures micronutrient density while remaining in strict ketosis.</p>
+        </div>
+    </div>
+
+    <!-- MACROS visual section -->
+    <div class="macros-section">
+        <div class="macros-title"><i class="fas fa-chart-pie" style="color:#3b82f6;"></i> MACRO BREAKDOWN <span style="font-size:0.9rem; font-weight:normal;">(daily reference)</span></div>
+        <div class="macro-bars">
+            <div class="macro-item">
+                <div class="macro-label"><i class="fas fa-bacon"></i> Healthy Fats</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width: 72%;"></div></div>
+                <div class="macro-percent">72%</div>
+            </div>
+            <div class="macro-item">
+                <div class="macro-label"><i class="fas fa-drumstick-bite"></i> Protein</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width: 23%; background: linear-gradient(90deg,#4f8ef7,#3b82f6);"></div></div>
+                <div class="macro-percent">23%</div>
+            </div>
+            <div class="macro-item">
+                <div class="macro-label"><i class="fas fa-carrot"></i> Net Carbs</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width: 5%; background: linear-gradient(90deg,#60a5fa,#3b82f6);"></div></div>
+                <div class="macro-percent">5%</div>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; font-size:0.85rem; color:#a0b2cf;"><i class="fas fa-chart-simple"></i> Personalized macros available via NOVA metabolic scan.</p>
+    </div>
+
+    <!-- ALLOWED FOODS (grid) -->
+    <div class="info-grid" style="margin-bottom: 1rem;">
+        <div class="info-card">
+            <i class="fas fa-check-circle"></i>
+            <h3>?? Priority Fats</h3>
+            <ul>
+                <li>Avocado & avocado oil</li>
+                <li>Coconut oil / MCT oil</li>
+                <li>Grass-fed butter, ghee</li>
+                <li>Olive oil, macadamia nuts</li>
+                <li>Fatty fish (salmon, sardines)</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>?? Clean Proteins</h3>
+            <ul>
+                <li>Pasture-raised eggs</li>
+                <li>Grass-fed beef, lamb</li>
+                <li>Chicken thighs, turkey</li>
+                <li>Bone broth, collagen</li>
+                <li>Tofu / tempeh (plant-based keto)</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-leaf"></i>
+            <h3>?? Low-Carb Veggies</h3>
+            <ul>
+                <li>Spinach, kale, arugula</li>
+                <li>Broccoli, cauliflower</li>
+                <li>Zucchini, asparagus</li>
+                <li>Bell peppers (moderate)</li>
+                <li>Mushrooms, celery</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-seedling"></i>
+            <h3>?? Seeds & Extras</h3>
+            <ul>
+                <li>Chia seeds, flaxseed</li>
+                <li>Pumpkin seeds, walnuts</li>
+                <li>Dark chocolate (85%+)</li>
+                <li>Unsweetened almond milk</li>
+                <li>Electrolyte drops / pink salt</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SAMPLE DAILY MEAL PLAN (1-day blueprint) -->
+    <div class="glass-card" style="padding: 1.8rem; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;"><i class="fas fa-utensils" style="color:#3b82f6; margin-right: 12px;"></i> Elite Keto Day — Fuel for Transformation</h2>
+        <p style="color:#a7b9d4; margin-bottom: 1.5rem;">Sample meal template designed by NOVA performance nutritionists. Adjust portions based on energy output.</p>
+        <div class="meal-grid">
+            <div class="meal-card">
+                <h4><i class="fas fa-sun"></i> BREAKFAST (7:30 AM)</h4>
+                <p><strong>MCT Coffee + Egg Bites</strong><br> 2 pasture-raised eggs, spinach, feta, baked in coconut oil. Bulletproof coffee with 1 tbsp MCT oil & ghee.</p>
+                <ul class="food-list"><li><i class="fas fa-check"></i> ~25g fat | 15g protein | 2g carbs</li></ul>
+            </div>
+            <div class="meal-card">
+                <h4><i class="fas fa-sun"></i> LUNCH (12:30 PM)</h4>
+                <p><strong>Avocado Salmon Bowl</strong><br> Grilled wild salmon over zucchini noodles, avocado, lemon-tahini dressing, hemp seeds.</p>
+                <ul class="food-list"><li><i class="fas fa-check"></i> High omega-3, 40g fat, 32g protein</li></ul>
+            </div>
+            <div class="meal-card">
+                <h4><i class="fas fa-moon"></i> DINNER (7:00 PM)</h4>
+                <p><strong>Lamb & Cauli Mash</strong><br> Grass-fed lamb chops, cauliflower mash with garlic & grass-fed butter, roasted asparagus.</p>
+                <ul class="food-list"><li><i class="fas fa-check"></i> Rich in CLA & electrolytes</li></ul>
+            </div>
+            <div class="meal-card">
+                <h4><i class="fas fa-apple-alt"></i> SNACK (optional)</h4>
+                <p><strong>Keto fat bomb or bone broth</strong><br> Coconut butter cups, macadamia nuts, or warm bone broth with sea salt.</p>
+                <ul class="food-list"><li><i class="fas fa-check"></i> Keeps ketones elevated</li></ul>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+            <div><i class="fas fa-tint"></i> Hydration: 3L+ water + electrolytes</div>
+            <div><i class="fas fa-chart-line"></i> Estimated net carbs: ~22g</div>
+            <div><i class="fas fa-fire"></i> Thermogenic effect: high</div>
+        </div>
+    </div>
+
+    <!-- FAQ / science snippet -->
+    <div class="info-grid" style="margin-bottom: 2rem;">
+        <div class="info-card">
+            <i class="fas fa-question-circle"></i>
+            <h3>Is KETO PEAK for me?</h3>
+            <p>Perfect for fat loss, metabolic reset, and sustained energy. Ideal for athletes seeking fat adaptation or anyone struggling with carb sensitivity. Not recommended for certain medical conditions — always consult a professional. Our coaches personalize refeed windows.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-chart-simple"></i>
+            <h3>Expected Results (8 weeks)</h3>
+            <ul>
+                <li>Significant body fat reduction</li>
+                <li>Steady energy without crashes</li>
+                <li>Reduced inflammation & bloating</li>
+                <li>Enhanced mental focus</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-dumbbell"></i>
+            <h3>Training Synergy</h3>
+            <p>Pair KETO PEAK with NOVA's strength & HIIT protocols for accelerated fat loss. During adaptation, moderate intensity; after fat-adaptation, explosive performance returns. Track ketones with NOVA app integration.</p>
+        </div>
+    </div>
+
+    <!-- CTA block: join / activate plan -->
+    <div class="glass-card cta-block">
+        <i class="fas fa-crown" style="font-size: 2.5rem; color: #3b82f6; margin-bottom: 0.6rem; display: inline-block;"></i>
+        <h2 style="font-size: 1.9rem; font-weight: 800;">Activate <span class="gradient-text">KETO PEAK</span> Transformation</h2>
+        <p style="max-width: 550px; margin: 0.8rem auto; color: #cbd5e6;">Get full access to weekly meal plans, grocery lists, keto-adapted recipes, and 1-on-1 dietitian coaching inside NOVA Elite.</p>
+        <button class="btn-primary" id="activateKetoBtn"><i class="fas fa-bolt"></i> UNLOCK FULL PLAN <i class="fas fa-arrow-right"></i></button>
+        <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.7;"><i class="fas fa-shield-alt"></i> 14-day trial + AI macro adjuster</p>
+    </div>
+</div>
+<footer class="footer glass">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="logo">NOVA<span style="color:#3b82f6;">FIT</span></h2>
+            <p>Next-gen fitness experience with AI-driven training, elite coaching, and transformation programs.</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">Workouts</a>
+            <a href="#">Diet Plans</a>
+            <a href="#">Membership</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Support</h3>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 NOVA FITNESS | Designed for Elite Performance</p>
+    </div>
+</footer>
+
+<script src ="app.js"></script>
+<script>
+    // interactive button with same micro-feedback as original site
+    const activateBtn = document.getElementById('activateKetoBtn');
+    if (activateBtn) {
+        activateBtn.addEventListener('click', () => {
+            alert("?? KETO PEAK activated! Welcome to NOVA metabolic evolution. Check your dashboard for custom meal plans & live coach access.");
+            // optional visual feedback ripple
+            activateBtn.style.transform = "scale(0.98)";
+            setTimeout(() => { activateBtn.style.transform = ""; }, 150);
+        });
+    }
+
+    // smooth hover effect on cards (already CSS, but small extra)
+    const allCards = document.querySelectorAll('.info-card, .meal-card, .macros-section');
+    allCards.forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+            card.style.transition = "all 0.2s ease";
+        });
+    });
+
+    // tiny parallax effect? no, just maintain original spirit
+    // background glow for buttons
+    const btns = document.querySelectorAll('.btn-primary');
+    btns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.boxShadow = "0 12px 28px -6px #3b82f6";
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.boxShadow = "0 10px 20px -5px rgba(59,130,246,0.4)";
+        });
+    });
+   
+    // animate on load: simple fade-up for main sections (optional)
+    window.addEventListener('DOMContentLoaded', () => {
+        const elements = document.querySelectorAll('.glass-card, .info-card, .macros-section');
+        elements.forEach((el, idx) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0)";
+            }, idx * 60);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NOVA | PLANT ELITE · Vegan Performance Fuel</title>
+    <!-- Google Fonts (same as original) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Font Awesome 6 -->
+                 <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+         .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(59,130,246,0.5);
+    padding: 0.5rem 1.2rem;
+    border-radius: 40px;
+    color: #cbd5e6;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: 0.2s;
+    font-size: 0.85rem;
+    margin-left: 85px;
+    margin-top: 43px;
+    height: 40px;
+    width: 171px;
+}
+
+        .back-link:hover {
+            background: rgba(59,130,246,0.2);
+            color: white;
+            border-color: #3b82f6;
+        }
+.gradient-text {
+            background: linear-gradient(120deg, #3b82f6, #93c5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+        <div class="cursor-circle"></div>
+<div class="cursor-dot"></div>
+<nav class="navbar">
+    <div class="logo">NOVA<span style="color:#3b82f6;">FIT</span></div>
+
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#about-section">About us</a>
+        <a href="#diet">Diet planner</a>
+        <a href="#membership-section">Membership</a>
+        <a href="bmi.html">BMI Calculator</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="nav-btn" id="joinUsBtn">Join us</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="https://videos.pexels.com/video-files/4494698/4494698-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="overlay-dark"></div>
+    <div class="hero-content">
+        <h1 id="heroMainText" style =" text-shadow: rgb(243 243 243 / 57%) 5.4612px 9.92386px 30px;
+    translate: none;
+    rotate: none;
+    scale: none;
+    transform: translate(0px, 0px);
+    opacity: 1;">SCULPT YOUR<br> EVOLUTION</h1>
+        <p class="hero-glow">Next‑gen performance. Limitless energy. Elite transformation.</p>
+        <button class="btn-primary" id="heroCta">IGNITE NOW <i class="fas fa-bolt"></i></button>
+    </div>
+    <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> go to homepage</a>
+
+<!-- ========== BMI CALCULATOR SECTION ========== -->
+<section id="bmi-section">
+    <div class="section-title">BMI <span>CALCULATOR</span></div>
+    <div class="bmi-container glass">
+        <div class="unit-toggle">
+            <div class="unit-btn active" data-unit="metric">Metric (kg/cm)</div>
+            <div class="unit-btn" data-unit="imperial">Imperial (lb/in)</div>
+        </div>
+        <div class="input-group" id="weight-group">
+            <label><i class="fas fa-weight-scale"></i> Weight (kg)</label>
+            <input type="number" id="weight-input" placeholder="Enter your weight" step="any">
+        </div>
+        <div class="input-group" id="height-group">
+            <label><i class="fas fa-ruler"></i> Height (cm)</label>
+            <input type="number" id="height-input" placeholder="Enter your height" step="any">
+        </div>
+        <button class="calculate-btn" id="calc-bmi"><i class="fas fa-calculator"></i> Calculate BMI</button>
+        <div class="bmi-result" id="bmi-result-area">
+            <div class="bmi-number">—</div>
+            <div class="bmi-category">Ready to evolve</div>
+            <div class="bmi-message">Enter your stats and discover your BMI</div>
+        </div>
+    </div>
+</section>
+<footer class="footer glass">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="logo">NOVA<span style="color:#3b82f6;">FIT</span></h2>
+            <p>Next-gen fitness experience with AI-driven training, elite coaching, and transformation programs.</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">Workouts</a>
+            <a href="#">Diet Plans</a>
+            <a href="#">Membership</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Support</h3>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 NOVA FITNESS | Designed for Elite Performance</p>
+    </div>
+</footer>
+
+<script src ="app.js"></script>
+<script>
+   // Activation button feedback (same as original site style)
+    const activateBtn = document.getElementById('activateProteinBtn');
+    if (activateBtn) {
+        activateBtn.addEventListener('click', () => {
+            alert("💪 PROTEIN FIRST activated! Welcome to NOVA muscle synthesis ecosystem. Check your dashboard for personalized meal plans, recovery protocols & coach access.");
+            activateBtn.style.transform = "scale(0.98)";
+            setTimeout(() => { activateBtn.style.transform = ""; }, 150);
+        });
+    }
+
+    // Hover effects on primary buttons
+    const btns = document.querySelectorAll('.btn-primary');
+    btns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.boxShadow = "0 12px 28px -6px #3b82f6";
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.boxShadow = "0 10px 20px -5px rgba(59,130,246,0.4)";
+        });
+    });
+
+    // Fade-in animation on load
+    window.addEventListener('DOMContentLoaded', () => {
+        const elements = document.querySelectorAll('.glass-card, .info-card, .macros-section');
+        elements.forEach((el, idx) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0)";
+            }, idx * 60);
+        });
+    });
+</script>
+</body>
+</html>
